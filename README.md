@@ -1,10 +1,10 @@
 # 🧬 Learning DNA
 
-> **Your Offline Adaptive AI Study Companion that Learns How You Learn**
+### Your Offline Adaptive AI Study Companion that Learns How You Learn
 
 ---
 
-# 📖 Overview
+## 📖 Overview
 
 Learning DNA is an AI-powered adaptive learning platform where every learner has a living AI tutor that grows alongside them. Unlike traditional AI chatbots that only respond when asked, Learning DNA's AI is proactive—it continuously monitors learning progress, study habits, schedules, and goals to actively guide students throughout their learning journey.
 
@@ -18,11 +18,11 @@ By combining adaptive teaching, AI-powered conversations, autonomous coaching, i
 
 ---
 
-# 🎯 Problem Statement
+## 🎯 Problem Statement
 
 Many students struggle because existing learning platforms provide a one-size-fits-all experience.
 
-## Common problems include:
+### Common problems include:
 
 - Lack of personalized teaching styles
 - Poor study scheduling
@@ -35,9 +35,9 @@ Learning DNA addresses these issues by creating an AI companion that understands
 
 ---
 
-# 💡 Solution
+## 💡 Solution
 
-Learning DNA introduces the concept of **Teaching DNA**.
+Learning DNA introduces the concept of Teaching DNA.
 
 Teaching DNA is a digital personality genome that determines how the AI teaches.
 
@@ -53,9 +53,9 @@ As the student continues learning, the AI becomes a more effective tutor.
 
 ---
 
-# ✨ Key Features
+## ✨ Key Features
 
-## 🤖 Adaptive AI Tutor
+### 🤖 Adaptive AI Tutor
 
 The heart of Learning DNA.
 
@@ -75,40 +75,40 @@ Unlike traditional chatbots, the AI develops a long-term understanding of the st
 
 ---
 
-## 🎭 Multiple AI Tutor Personalities
+### 🎭 Multiple AI Tutor Personalities
 
 Learning DNA isn't limited to a single AI tutor. Students can choose from multiple AI tutors, each with a distinct personality, teaching philosophy, and motivational style.
 
 Every AI tutor teaches the same subjects but interacts with students differently, allowing learners to choose the mentor that best fits their needs or switch tutors at any time.
 
-### Available AI Tutors
+#### Available AI Tutors
 
-#### ❤️ Caring Mentor
+##### ❤️ Caring Mentor
 
 - Patient and encouraging
 - Builds confidence through positive reinforcement
 - Ideal for beginners or anxious learners
 
-#### 💪 Strict Coach
+##### 💪 Strict Coach
 
 - Holds students accountable
 - Challenges procrastination
 - Gives direct feedback and pushes consistent study habits
 - Perfect for exam preparation
 
-#### 😄 Friendly Study Buddy
+##### 😄 Friendly Study Buddy
 
 - Casual and conversational
 - Uses humor and relatable examples
 - Makes studying feel less intimidating
 
-#### 🎓 Professional Teacher
+##### 🎓 Professional Teacher
 
 - Structured and academic
 - Provides detailed explanations and organized lessons
 - Best for mastering complex subjects
 
-#### 🔥 Motivational Trainer
+##### 🔥 Motivational Trainer
 
 - Focuses on discipline and goal achievement
 - Celebrates milestones and encourages perseverance
@@ -118,13 +118,13 @@ The AI tutor's personality also affects how it communicates outside study sessio
 
 ---
 
-## 🧠 Personalized Teaching DNA
+### 🧠 Personalized Teaching DNA
 
-Every learner has a unique **Learning DNA.**
+Every learner has a unique "Learning DNA."
 
 The AI identifies the student's preferred learning style and adapts accordingly.
 
-### Examples
+Examples:
 
 - Visual explanations
 - Step-by-step problem solving
@@ -137,17 +137,17 @@ The teaching method continuously evolves based on the student's performance.
 
 ---
 
-## 🌐 Language & Communication Style
+### 🌐 Language & Communication Style
 
 Students can personalize how the AI communicates.
 
-### Languages
+#### Languages
 
 - English
 - Filipino
 - Taglish
 
-### Speaking Styles
+#### Speaking Styles
 
 - Formal
 - Casual
@@ -160,7 +160,7 @@ This makes studying feel more natural and engaging.
 
 ---
 
-## 📅 Smart Study Scheduler
+### 📅 Smart Study Scheduler
 
 Learning DNA automatically creates an optimized study schedule using factors such as:
 
@@ -177,11 +177,11 @@ The AI recommends the best times to study, rest, and review topics to maximize r
 
 ---
 
-## 📊 Learning Analytics Dashboard
+### 📊 Learning Analytics Dashboard
 
 Provides insights into learning performance.
 
-### Dashboard includes
+#### Dashboard includes:
 
 - Weekly study hours
 - Monthly progress
@@ -196,11 +196,11 @@ These insights help students understand their study habits and improve productiv
 
 ---
 
-## 🎮 Gamification System
+### 🎮 Gamification System
 
 Studying becomes more engaging through game-like mechanics.
 
-### Features include
+#### Features include:
 
 - Daily check-ins
 - XP (Experience Points)
@@ -214,7 +214,7 @@ The system encourages consistency while making learning enjoyable.
 
 ---
 
-## 🔔 Intelligent Reminders
+### 🔔 Intelligent Reminders
 
 The AI actively helps students stay on track by sending reminders for:
 
@@ -230,13 +230,13 @@ Reminders are personalized based on the student's schedule and habits.
 
 ---
 
-## 📱 Cross-Platform Learning (Web & Mobile)
+### 📱 Cross-Platform Learning (Web & Mobile)
 
 Learning DNA is available as both a web application and a mobile application, allowing students to continue learning wherever they are.
 
 The mobile app is designed for uninterrupted studying, ensuring that users can access their learning materials even without an internet connection.
 
-### Mobile Features
+#### Mobile Features
 
 - 📚 Access downloaded lessons offline
 - 📝 Read saved notes and summaries
@@ -248,7 +248,7 @@ The mobile app is designed for uninterrupted studying, ensuring that users can a
 
 ---
 
-## 📶 Offline-First Synchronization
+### 📶 Offline-First Synchronization
 
 Learning DNA is built using an offline-first architecture.
 
@@ -276,7 +276,7 @@ This ensures that:
 
 ---
 
-# ⚙️ How It Works
+## ⚙️ How It Works
 
 1. User completes a profile assessment.
 2. The AI analyzes learning preferences, personality, and daily routines.
@@ -301,7 +301,7 @@ The AI continuously updates the student's Teaching DNA, improving future recomme
 
 ---
 
-# 🏗️ System Modules
+## 🏗️ System Modules
 
 - Authentication
 - User Profile Assessment
@@ -320,7 +320,7 @@ The AI continuously updates the student's Teaching DNA, improving future recomme
 
 ---
 
-# 🎯 Target Users
+## 🎯 Target Users
 
 - High school students
 - College students
@@ -330,56 +330,79 @@ The AI continuously updates the student's Teaching DNA, improving future recomme
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-## Frontend
+### Frontend
 
 - React / Next.js (Web)
 - React Native or Flutter (Mobile)
 - Tailwind CSS
 
-## Backend
+### Backend
 
 - Node.js
 - Express.js
 
-## Database
+### Database
 
 - PostgreSQL (Supabase)
 - SQLite (Offline Storage)
 - pgvector (AI Memory & RAG)
 
-## AI
+### AI
 
-- OpenAI API or Google Gemini API
+- Google Gemini API
+- Google AI Studio
 - LangChain
 - Embeddings
-- RAG
+- Retrieval-Augmented Generation (RAG)
 
-## Authentication
+### Authentication
 
 - Firebase Authentication
 - Google OAuth
 
-## Synchronization
+### Synchronization
 
 - Firebase Cloud Sync
 - Background Sync API
 - Offline-First Data Layer
 
-## Deployment
+### Deployment
 
 - Android APK / Test Build
 - Firebase Hosting (Backend/API)
 
 ---
 
-# 🌟 Vision
+## 👑 MVP
+
+### Implemented:
+
+- AI chatbot
+- Multiple AI personalities
+- Teaching DNA (adapt learning style)
+- Learning Journey/Syllabus generation
+- Learning resource recommendations (videos/articles)
+- Offline mode with local storage
+- Progress synchronization (basic implementation)
+- Push notifications/reminders (or scheduled local notifications)
+
+### Planned:
+
+- Full analytics dashboard (basic charts instead)
+- Complex gamification (just XP and streaks)
+- Sophisticated scheduler (simple AI-generated schedule)
+- Continuous autonomous monitoring (simulate proactive behavior with notifications)
+
+---
+
+## 🌟 Vision
 
 Learning DNA aims to redefine personalized education by creating an AI companion that doesn't just teach—it grows with the learner. By adapting to each student's unique habits, personality, and goals, while remaining accessible across web and mobile devices with offline support, Learning DNA transforms studying into a more engaging, effective, and uninterrupted lifelong learning experience.
 
 ---
 
-# 💬 Project Tagline
+## 💬 Project Tagline
 
-> **"Every student learns differently. Learning DNA ensures every student is taught differently."**
+> "Every student learns differently. Learning DNA ensures every student is taught differently."

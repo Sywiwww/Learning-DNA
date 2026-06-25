@@ -1,6 +1,6 @@
 # 🧬 Learning DNA
 
-### Your Offline Adaptive AI Study Companion that Learns How You Learn
+### Your Adaptive AI Study Companion that Learns How You Learn
 
 ---
 

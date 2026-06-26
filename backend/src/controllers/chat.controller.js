@@ -15,10 +15,10 @@ exports.chat = async (req, res) => {
     // 1. GET CHAT HISTORY
     const { data: history, error: historyError } = await supabase
       .from("chat_history")
-      .select("message, reply")
+      .select("message, reply, memory_summary")
       .eq("user_id", user_id)
       .order("created_at", { ascending: false })
-      .limit(10);
+      .limit(6);
 
     if (historyError) {
       console.error("History fetch error:", historyError);
@@ -30,39 +30,65 @@ exports.chat = async (req, res) => {
       .map((chat) => `User: ${chat.message}\nAI: ${chat.reply}`)
       .join("\n");
 
-    // 3. SEND TO GEMINI
+    // 3. SEND TO GEMINI (MAIN RESPONSE)
     const response = await sendChatMessage({
       message: `
-Previous conversation:
+You are an AI tutor for a student.
+
+Long-term memory about the user:
+${history?.map(h => h.memory_summary).filter(Boolean).join("\n")}
+
+Recent conversation:
 ${formattedHistory}
 
 Current user message:
 ${message}
-      `,
+
+Use the long-term memory to:
+- remember what the student is learning
+- maintain personality consistency
+- avoid repeating explanations
+- adapt teaching style over time
+`,
       personalityId: personality || "friendly",
     });
 
-    // 🔍 DEBUG AI RESPONSE (IMPORTANT)
     console.log("AI RESPONSE RAW:", response);
 
     const aiText = response?.text;
 
     if (!aiText) {
       console.error("AI returned empty response");
+      return res.status(500).json({
+        success: false,
+        message: "AI returned empty response",
+      });
     }
 
-    // 4. SAVE TO SUPABASE
-    const { data, error } = await supabase
-      .from("chat_history")
-      .insert([
-        {
-          user_id,
-          message,
-          reply: aiText,
-          personality: personality || "friendly",
-        },
-      ])
-      .select();
+    // 4. GENERATE MEMORY SUMMARY
+    const summaryResponse = await sendChatMessage({
+      message: `
+Summarize this conversation in 1-2 sentences for long-term memory.
+
+Conversation:
+${formattedHistory}
+
+Latest message:
+${message}
+      `,
+      personalityId: "professional",
+    });
+
+    // 5. SAVE TO SUPABASE
+    const { data, error } = await supabase.from("chat_history").insert([
+      {
+        user_id,
+        message,
+        reply: aiText,
+        personality: personality || "friendly",
+        memory_summary: summaryResponse?.text || "",
+      },
+    ]);
 
     if (error) {
       console.error("SUPABASE INSERT ERROR:", error);
@@ -70,7 +96,7 @@ ${message}
       console.log("SUPABASE INSERT SUCCESS:", data);
     }
 
-    // 5. RESPONSE
+    // 6. RETURN RESPONSE
     res.json({
       success: true,
       reply: aiText,

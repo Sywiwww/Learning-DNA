@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/", (req, res) => {
-  res.json({ message: "Chat endpoint working" });
-});
+const chatController = require("../controllers/chat.controller");
+
+router.post("/", chatController.chat);
 
 module.exports = router;

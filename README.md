@@ -2,6 +2,10 @@
 
 ### Your Adaptive AI Study Companion that Learns How You Learn
 
+> 🚧 **Project Status**
+>
+> This project is currently under active development. Features, APIs, and documentation may change as development progresses. Some functionality may be incomplete or unavailable.
+
 ---
 
 ## 📖 Overview

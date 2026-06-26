@@ -406,3 +406,22 @@ Learning DNA aims to redefine personalized education by creating an AI companion
 ## 💬 Project Tagline
 
 > "Every student learns differently. Learning DNA ensures every student is taught differently."
+
+---
+🤖 AI Usage
+This project was developed with the assistance of generative AI tools to improve productivity during the hackathon. All architectural decisions, feature implementation, integration, testing, and final review were performed by the development team.
+
+ChatGPT (OpenAI)
+- Assisted with content writing, documentation, code explanations, debugging, and development support.
+
+Claude (Anthropic)
+- Assisted with UI/UX brainstorming, interface improvements, and design suggestions.
+
+Google Gemini
+- Assisted with UI/UX ideation, workflow refinement, and design feedback.
+
+OpenAI Codex
+- Assisted with coding support, code generation, refactoring, and implementation guidance.
+
+Note: AI tools were used as development assistants. Final design decisions, source code, testing, and project integration were completed by the Learning DNA development team.
+

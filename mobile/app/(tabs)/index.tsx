@@ -1,14 +1,23 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import { Text, View } from "@/components/Themed";
 
-export default function TabOneScreen() {
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.title}>🧬 Learning DNA</Text>
+
+      <Text style={styles.subtitle}>
+        Your Adaptive AI Study Companion
+      </Text>
+
+      <Text style={styles.description}>
+        The mobile application has been successfully initialized.
+      </Text>
+
+      <Text style={styles.description}>
+        Learning DNA is ready for development.
+      </Text>
     </View>
   );
 }
@@ -16,16 +25,26 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
   },
+
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontWeight: "bold",
+    marginBottom: 16,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 24,
+    textAlign: "center",
+  },
+
+  description: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 10,
   },
 });

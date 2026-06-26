@@ -12,6 +12,22 @@ exports.chat = async (req, res) => {
       });
     }
 
+    // GET USER'S SAVED PERSONALITY
+    const { data: user, error: userError } = await supabase
+    .from("users")
+    .select("preferred_personality")
+    .eq("id", user_id)
+    .single();
+
+    if (userError) {
+    console.error("User fetch error:", userError);
+    }
+
+    const personalityToUse =
+    personality ||
+    user?.preferred_personality ||
+    "friendly";
+
     // 1. GET CHAT HISTORY
     const { data: history, error: historyError } = await supabase
       .from("chat_history")
@@ -50,7 +66,7 @@ Use the long-term memory to:
 - avoid repeating explanations
 - adapt teaching style over time
 `,
-      personalityId: personality || "friendly",
+      personalityId: personalityToUse,
     });
 
     console.log("AI RESPONSE RAW:", response);
@@ -85,7 +101,7 @@ ${message}
         user_id,
         message,
         reply: aiText,
-        personality: personality || "friendly",
+        personality: personalityToUse,
         memory_summary: summaryResponse?.text || "",
       },
     ]);

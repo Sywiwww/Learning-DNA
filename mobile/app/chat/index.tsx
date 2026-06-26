@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { THEME } from "@/constants/theme";
+import SQLiteService from "@/services/sqlite";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState([
@@ -10,10 +11,19 @@ export default function ChatScreen() {
   const [inputText, setInputText] = useState('');
   const flatListRef = useRef<FlatList>(null);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputText.trim()) return;
     const userMsg = { id: Date.now().toString(), sender: 'user', text: inputText };
     setMessages(prev => [...prev, userMsg]);
+    // await SQLiteService.initializeDatabase();
+
+    // await SQLiteService.saveChat({
+    //   question: inputText,
+    //   answer: "",
+    //   subject: "General",
+    //   personality: "Friendly",
+    // });
+
     setInputText('');
     setTimeout(() => { flatListRef.current?.scrollToEnd({ animated: true }); }, 100);
   };

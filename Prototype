@@ -1,1 +1,1222 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning DNA v2</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0A0914;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 12px;
+  overflow-x: hidden;
+}
+
+/* ── STAGE ── */
+.stage {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 780px;
+}
+
+/* ── COACH SIDEBAR ── */
+.coach-sidebar {
+  width: 140px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  position: sticky;
+  top: 24px;
+}
+
+.coach-avatar-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.coach-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5B21B6, #7C3AED);
+  border: 2.5px solid #A78BFA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.coach-avatar:hover { transform: scale(1.04); }
+
+.coach-avatar-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* placeholder person silhouette */
+.avatar-body {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  margin-bottom: -4px;
+  position: relative;
+  z-index: 2;
+}
+.avatar-shoulders {
+  width: 52px;
+  height: 28px;
+  border-radius: 26px 26px 0 0;
+  background: rgba(255,255,255,0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.coach-status {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22C55E;
+  border: 2px solid #0A0914;
+}
+
+.coach-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+}
+
+.coach-role {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.coach-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(167,139,250,0.15);
+  border: 1px solid rgba(167,139,250,0.3);
+  font-size: 9px;
+  color: #A78BFA;
+  font-weight: 500;
+}
+
+.coach-nudge {
+  background: #1A1535;
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  text-align: center;
+  position: relative;
+}
+
+.coach-nudge::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 6px;
+  background: #1A1535;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.coach-nudge strong {
+  color: #C4B5FD;
+  font-weight: 500;
+}
+
+.coach-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.coach-act-btn {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(124,58,237,0.35);
+  background: rgba(124,58,237,0.1);
+  color: #A78BFA;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
+}
+.coach-act-btn:hover { background: rgba(124,58,237,0.2); }
+.coach-act-btn i { font-size: 12px; }
+
+/* ── PHONE ── */
+.phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.phone-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.phone {
+  width: 300px;
+  height: 600px;
+  border-radius: 38px;
+  border: 7px solid #1E1B35;
+  background: #0D0B1E;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(167,139,250,0.12), 0 32px 64px -16px rgba(0,0,0,0.7);
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: #1E1B35;
+  border-radius: 0 0 14px 14px;
+  z-index: 100;
+}
+
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: #130F2A;
+  padding: 26px 12px 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  z-index: 80;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #7C3AED;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.topbar-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  flex: 1;
+  letter-spacing: 0.01em;
+}
+.topbar-title span { color: #A78BFA; }
+
+.topbar-icons {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.tb-av {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #5B21B6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: #fff;
+  border: 1.5px solid #A78BFA;
+}
+
+/* ── PAGES ── */
+.pages {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.pg {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  scrollbar-width: none;
+}
+.pg::-webkit-scrollbar { display: none; }
+.pg.active { display: flex; }
+
+.pg-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 76px;
+}
+
+/* ── NAV ── */
+.navbar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: #130F2A;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  flex-shrink: 0;
+  z-index: 90;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  flex: 1;
+}
+.nav-btn i { font-size: 17px; color: rgba(255,255,255,0.3); }
+.nav-btn span { font-size: 8px; color: rgba(255,255,255,0.3); }
+.nav-btn.active i, .nav-btn.active span { color: #A78BFA; }
+.nav-btn.active { background: rgba(124,58,237,0.12); }
+
+/* ── CARDS ── */
+.card {
+  background: #16123A;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 11px;
+}
+
+.card-sm {
+  background: #16123A;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 9px 10px;
+}
+
+/* ── HERO BANNER ── */
+.hero {
+  background: #2D1B6B;
+  border-radius: 14px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '🧬';
+  position: absolute;
+  right: -4px;
+  top: -8px;
+  font-size: 52px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 8px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.hero h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.hero p {
+  font-size: 9px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+/* ── COACH STRIP (inside phone) ── */
+.coach-strip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 11px;
+  background: rgba(124,58,237,0.1);
+  border: 1px solid rgba(124,58,237,0.22);
+  border-radius: 12px;
+}
+
+.cs-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #5B21B6;
+  border: 1.5px solid #A78BFA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+.cs-av-head { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); margin-bottom: -2px; }
+.cs-av-body { width: 22px; height: 12px; border-radius: 11px 11px 0 0; background: rgba(255,255,255,0.2); }
+
+.cs-content { flex: 1; }
+.cs-name { font-size: 10px; font-weight: 500; color: #fff; }
+.cs-msg { font-size: 9px; color: rgba(255,255,255,0.5); line-height: 1.4; margin-top: 1px; }
+
+.cs-btn {
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: #7C3AED;
+  border: none;
+  color: #fff;
+  font-size: 9px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── STATS ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.stat-label { font-size: 8px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+.stat-val { font-size: 17px; font-weight: 600; color: #fff; }
+.stat-sub { font-size: 8px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+
+.pb { height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; margin-top: 5px; }
+.pf { height: 3px; border-radius: 2px; }
+
+/* ── PILLS ── */
+.pill { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 20px; font-size: 8px; font-weight: 500; }
+.pill-p { background: rgba(139,92,246,0.18); color: #C4B5FD; }
+.pill-g { background: rgba(34,197,94,0.15); color: #86EFAC; }
+.pill-a { background: rgba(251,191,36,0.12); color: #FCD34D; }
+.pill-b { background: rgba(96,165,250,0.12); color: #93C5FD; }
+
+/* ── SECT TITLE ── */
+.sect-title {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sect-title span { font-size: 9px; color: #8B5CF6; cursor: pointer; }
+
+/* ── SCHEDULE ── */
+.sched-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sched-row:last-child { border-bottom: none; }
+.sched-time { font-size: 8px; color: rgba(255,255,255,0.3); min-width: 36px; }
+.sched-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.sched-ttl { font-size: 10px; color: #fff; }
+.sched-sub { font-size: 8px; color: rgba(255,255,255,0.35); }
+
+/* ── CHAT ── */
+.msg { max-width: 82%; margin-bottom: 7px; }
+.msg.ai { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.bubble { padding: 7px 10px; border-radius: 10px; font-size: 9px; line-height: 1.5; }
+.msg.ai .bubble { background: #1E1A40; border: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); border-radius: 3px 10px 10px 10px; }
+.msg.user .bubble { background: #7C3AED; color: #fff; border-radius: 10px 3px 10px 10px; }
+.msg-name { font-size: 7px; color: rgba(255,255,255,0.3); margin-bottom: 2px; }
+
+.chat-av {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #5B21B6;
+  border: 1px solid #A78BFA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  overflow: hidden;
+  flex-direction: column;
+}
+.chat-av-h { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.35); margin-bottom: -1px; }
+.chat-av-b { width: 14px; height: 8px; border-radius: 7px 7px 0 0; background: rgba(255,255,255,0.22); }
+
+.msg-row { display: flex; gap: 5px; align-items: flex-start; }
+
+.chat-input {
+  display: flex;
+  gap: 5px;
+  padding: 8px 10px;
+  background: #130F2A;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 72px;
+}
+.chat-input input {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 6px 9px;
+  color: #fff;
+  font-size: 9px;
+  outline: none;
+}
+.chat-input input::placeholder { color: rgba(255,255,255,0.25); }
+.send-b {
+  background: #7C3AED;
+  border: none;
+  border-radius: 7px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+}
+
+/* ── ANALYTICS ── */
+.bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 56px; margin-top: 4px; }
+.bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 2px; }
+.bar { width: 100%; border-radius: 3px 3px 0 0; }
+.bar-lbl { font-size: 7px; color: rgba(255,255,255,0.3); }
+
+/* ── BADGES ── */
+.badge-g { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; }
+.badge-item { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 4px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+.badge-ic { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.badge-nm { font-size: 7px; color: rgba(255,255,255,0.75); text-align: center; }
+
+/* ── LEADERBOARD ── */
+.lb-item { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.lb-item:last-child { border-bottom: none; }
+.lb-av { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; }
+.lb-nm { flex: 1; font-size: 10px; color: rgba(255,255,255,0.75); }
+.lb-pt { font-size: 9px; color: #A78BFA; font-weight: 500; }
+
+/* ── DNA TRAITS ── */
+.dna-trait { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.dna-trait:last-child { border-bottom: none; }
+.dna-tn { font-size: 9px; color: rgba(255,255,255,0.45); }
+.dna-tv { font-size: 9px; font-weight: 500; color: #A78BFA; }
+
+/* ── ONBOARDING ── */
+.ob-overlay {
+  position: absolute;
+  inset: 0;
+  background: #0D0B1E;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  gap: 10px;
+}
+.ob-overlay.hide { display: none; }
+
+.ob-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; width: 100%; }
+.ob-opt {
+  padding: 8px;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.ob-opt.sel { border-color: #7C3AED; background: rgba(124,58,237,0.2); color: #fff; }
+
+.ob-btn {
+  background: #7C3AED;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 9px;
+  font-size: 11px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.ob-d { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+.ob-d.on { background: #7C3AED; width: 14px; border-radius: 3px; }
+.ob-dots { display: flex; gap: 4px; justify-content: center; }
+
+/* ── PERSONALITY CARD (onboarding step) ── */
+.pers-card {
+  background: #1E1A40;
+  border: 1px solid rgba(124,58,237,0.25);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+}
+.pers-card.sel { border-color: #7C3AED; background: rgba(124,58,237,0.15); }
+.pers-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.pers-info { flex: 1; }
+.pers-name { font-size: 11px; font-weight: 500; color: #fff; }
+.pers-desc { font-size: 8px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+.pers-badge { font-size: 8px; padding: 2px 6px; border-radius: 10px; font-weight: 500; }
+
+/* ── SUBJECT CARDS ── */
+.subj-card { border-radius: 12px; padding: 10px; cursor: pointer; }
+.subj-card h3 { font-size: 11px; font-weight: 500; color: #fff; }
+.subj-card p { font-size: 8px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+/* ── PROFILE ── */
+.profile-av-wrap {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #5B21B6;
+  border: 2px solid #A78BFA;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin: 0 auto 6px;
+  overflow: hidden;
+  flex-direction: column;
+}
+.pav-head { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.3); margin-bottom: -3px; }
+.pav-body { width: 36px; height: 20px; border-radius: 18px 18px 0 0; background: rgba(255,255,255,0.2); }
+
+/* ── JOURNEY ── */
+.journey-step {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.journey-step:last-child { border-bottom: none; }
+.j-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.j-info { flex: 1; }
+.j-title { font-size: 10px; color: #fff; }
+.j-sub { font-size: 8px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+.j-week { font-size: 8px; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- ═══════════ COACH SIDEBAR ═══════════ -->
+  <div class="coach-sidebar">
+    <div class="coach-avatar-wrap">
+      <div class="coach-avatar" onclick="document.getElementById('pg-chat')&&navigateTo('chat')">
+        <div class="coach-avatar-inner">
+          <div class="avatar-body"></div>
+          <div class="avatar-shoulders"></div>
+        </div>
+      </div>
+      <div class="coach-status"></div>
+    </div>
+
+    <div>
+      <div class="coach-name">Lexa</div>
+      <div class="coach-role">Your Caring Mentor</div>
+    </div>
+
+    <div class="coach-tag">
+      <i class="ti ti-heart" style="font-size:9px;"></i>
+      Caring Mentor
+    </div>
+
+    <div class="coach-nudge">
+      <strong>Hey Syril!</strong> You're close to finishing Algebra — just 2 more topics. Let's get it done today 😊
+    </div>
+
+    <div class="coach-actions">
+      <button class="coach-act-btn" onclick="navigateTo('chat')">
+        <i class="ti ti-message-circle"></i> Chat with Lexa
+      </button>
+      <button class="coach-act-btn" onclick="navigateTo('schedule')">
+        <i class="ti ti-calendar"></i> Today's plan
+      </button>
+      <button class="coach-act-btn" onclick="navigateTo('journey')">
+        <i class="ti ti-map"></i> Learning path
+      </button>
+    </div>
+
+    <div style="font-size:9px;color:rgba(255,255,255,0.2);text-align:center;line-height:1.5;">
+      Tap Lexa anytime<br>to get support
+    </div>
+  </div>
+
+  <!-- ═══════════ PHONE ═══════════ -->
+  <div class="phone-wrap">
+    <div class="phone" id="app-phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+          <div class="logo-mark">🧬</div>
+          <div class="topbar-title">Learning<span>DNA</span></div>
+          <div class="topbar-icons">
+            <i class="ti ti-bell" style="color:rgba(255,255,255,0.4);font-size:13px;"></i>
+            <div class="tb-av">SY</div>
+          </div>
+        </div>
+
+        <div class="pages" id="phone-pages">
+
+          <!-- ═══ HOME ═══ -->
+          <div class="pg active" id="pg-home">
+
+            <!-- Onboarding overlay -->
+            <div class="ob-overlay" id="ph1-ob">
+              <div style="font-size:28px;margin-bottom:6px;">🧬</div>
+              <div style="font-size:13px;font-weight:600;color:#fff;text-align:center;">Discover Your Learning DNA</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4);text-align:center;line-height:1.5;margin-bottom:4px;">Build your personal study profile in 4 steps</div>
+              <div class="ob-dots">
+                <div class="ob-d on" id="p1d1"></div>
+                <div class="ob-d" id="p1d2"></div>
+                <div class="ob-d" id="p1d3"></div>
+                <div class="ob-d" id="p1d4"></div>
+              </div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.6);width:100%;text-align:left;" id="p1-question">What's your grade level?</div>
+              <div class="ob-opts" id="p1opts">
+                <div class="ob-opt sel" onclick="selOb1(this)">High School</div>
+                <div class="ob-opt" onclick="selOb1(this)">College</div>
+                <div class="ob-opt" onclick="selOb1(this)">Grade School</div>
+                <div class="ob-opt" onclick="selOb1(this)">Self-learner</div>
+              </div>
+              <button class="ob-btn" onclick="ob1Next()">Continue →</button>
+            </div>
+
+            <!-- Personality selection overlay (step 3 of onboarding) -->
+            <div class="ob-overlay hide" id="ph1-pers">
+              <div style="font-size:11px;font-weight:500;color:#fff;text-align:center;margin-bottom:10px;">Choose your tutor style</div>
+              <div style="display:flex;flex-direction:column;gap:6px;width:100%;">
+                <div class="pers-card sel" onclick="selPers(this,'caring')">
+                  <div class="pers-icon" style="background:rgba(236,72,153,0.15);">❤️</div>
+                  <div class="pers-info">
+                    <div class="pers-name">Caring Mentor</div>
+                    <div class="pers-desc">Patient · Kind · Encouraging</div>
+                  </div>
+                  <span class="pers-badge" style="background:rgba(236,72,153,0.15);color:#F9A8D4;">Warm</span>
+                </div>
+                <div class="pers-card" onclick="selPers(this,'buddy')">
+                  <div class="pers-icon" style="background:rgba(34,197,94,0.12);">😄</div>
+                  <div class="pers-info">
+                    <div class="pers-name">Study Buddy</div>
+                    <div class="pers-desc">Fun · Casual · Friendly</div>
+                  </div>
+                  <span class="pers-badge" style="background:rgba(34,197,94,0.12);color:#86EFAC;">Chill</span>
+                </div>
+                <div class="pers-card" onclick="selPers(this,'coach')">
+                  <div class="pers-icon" style="background:rgba(251,191,36,0.12);">💪</div>
+                  <div class="pers-info">
+                    <div class="pers-name">Strict Coach</div>
+                    <div class="pers-desc">Discipline · Focus · Challenge</div>
+                  </div>
+                  <span class="pers-badge" style="background:rgba(251,191,36,0.12);color:#FCD34D;">Tough</span>
+                </div>
+                <div class="pers-card" onclick="selPers(this,'pro')">
+                  <div class="pers-icon" style="background:rgba(96,165,250,0.12);">🎓</div>
+                  <div class="pers-info">
+                    <div class="pers-name">Professional</div>
+                    <div class="pers-desc">Structured · Academic · Clear</div>
+                  </div>
+                  <span class="pers-badge" style="background:rgba(96,165,250,0.12);color:#93C5FD;">Formal</span>
+                </div>
+              </div>
+              <button class="ob-btn" style="margin-top:6px;" onclick="finishOnboarding()">Start Learning →</button>
+            </div>
+
+            <div class="pg-content">
+              <!-- Hero -->
+              <div class="hero">
+                <div class="hero-eyebrow">🧬 DNA ACTIVE</div>
+                <h2>Magandang gabi, Syril! 👋</h2>
+                <p>Peak energy 7–9 PM detected. Visual learner mode on. Let's make progress tonight!</p>
+                <div style="display:flex;gap:4px;margin-top:7px;flex-wrap:wrap;">
+                  <div class="pill pill-p">Visual</div>
+                  <div class="pill" style="background:rgba(236,72,153,0.15);color:#F9A8D4;">❤️ Caring</div>
+                  <div class="pill pill-a">Taglish</div>
+                </div>
+              </div>
+
+              <!-- Coach strip -->
+              <div class="coach-strip">
+                <div class="cs-av">
+                  <div class="cs-av-head"></div>
+                  <div class="cs-av-body"></div>
+                </div>
+                <div class="cs-content">
+                  <div class="cs-name">Lexa says:</div>
+                  <div class="cs-msg">You're doing great! 2 topics left in Algebra. No rush 😊</div>
+                </div>
+                <button class="cs-btn" onclick="navigateTo('chat')">Chat</button>
+              </div>
+
+              <!-- Stats -->
+              <div class="g2">
+                <div class="card-sm">
+                  <div class="stat-label">Today's goal</div>
+                  <div class="stat-val">2h</div>
+                  <div class="stat-sub">1.2h done · 60%</div>
+                  <div class="pb"><div class="pf" style="width:60%;background:#7C3AED;"></div></div>
+                </div>
+                <div class="card-sm">
+                  <div class="stat-label">XP Points</div>
+                  <div class="stat-val">2,350</div>
+                  <div class="stat-sub">🔥 12-day streak</div>
+                </div>
+              </div>
+
+              <!-- Today's schedule -->
+              <div class="card">
+                <div class="sect-title">Today's Schedule <span onclick="navigateTo('schedule')">View all</span></div>
+                <div class="sched-row">
+                  <div class="sched-time">7:00 PM</div>
+                  <div class="sched-dot" style="background:#7C3AED;"></div>
+                  <div style="flex:1;"><div class="sched-ttl">Algebra Review</div><div class="sched-sub">30 min · Visual mode</div></div>
+                  <div class="pill pill-p">Now</div>
+                </div>
+                <div class="sched-row">
+                  <div class="sched-time">8:00 PM</div>
+                  <div class="sched-dot" style="background:#34D399;"></div>
+                  <div><div class="sched-ttl">Science: Cells</div><div class="sched-sub">45 min</div></div>
+                </div>
+              </div>
+
+              <!-- Continue -->
+              <div class="card">
+                <div class="sect-title">Continue learning</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div style="display:flex;align-items:center;gap:7px;padding:7px;border-radius:9px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);cursor:pointer;" onclick="navigateTo('chat')">
+                    <div style="width:26px;height:26px;border-radius:7px;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📐</div>
+                    <div style="flex:1;"><div style="font-size:10px;color:#fff;">Quadratic Equations</div><div class="pb" style="margin-top:3px;"><div class="pf" style="width:48%;background:#7C3AED;"></div></div></div>
+                    <div style="font-size:8px;color:#A78BFA;">48%</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:7px;padding:7px;border-radius:9px;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.15);cursor:pointer;" onclick="navigateTo('subjects')">
+                    <div style="width:26px;height:26px;border-radius:7px;background:rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">🔬</div>
+                    <div style="flex:1;"><div style="font-size:10px;color:#fff;">Cell Biology</div><div class="pb" style="margin-top:3px;"><div class="pf" style="width:72%;background:#34D399;"></div></div></div>
+                    <div style="font-size:8px;color:#86EFAC;">72%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ CHAT ═══ -->
+          <div class="pg" id="pg-chat">
+            <div style="padding:9px 10px;background:#130F2A;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#5B21B6;border:1.5px solid #A78BFA;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-direction:column;">
+                  <div style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.3);margin-bottom:-1px;"></div>
+                  <div style="width:18px;height:10px;border-radius:9px 9px 0 0;background:rgba(255,255,255,0.2);"></div>
+                </div>
+                <div>
+                  <div style="font-size:11px;font-weight:500;color:#fff;">Lexa — Caring Mentor</div>
+                  <div style="display:flex;gap:3px;margin-top:2px;">
+                    <div class="pill" style="background:rgba(236,72,153,0.15);color:#F9A8D4;">❤️ Caring</div>
+                    <div class="pill pill-a">Taglish</div>
+                    <div class="pill pill-p">Visual</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;scrollbar-width:none;">
+              <div class="msg ai">
+                <div class="msg-row">
+                  <div class="chat-av"><div class="chat-av-h"></div><div class="chat-av-b"></div></div>
+                  <div>
+                    <div class="msg-name">Lexa ❤️</div>
+                    <div class="bubble">Hoy Syril! 👋 Visual learner ka diba? So let's use diagrams today. Anong topic — Algebra o Science? 🤔</div>
+                  </div>
+                </div>
+              </div>
+              <div class="msg user"><div class="bubble">Algebra please. Hindi ko gets yung quadratic formula.</div></div>
+              <div class="msg ai">
+                <div class="msg-row">
+                  <div class="chat-av"><div class="chat-av-h"></div><div class="chat-av-b"></div></div>
+                  <div>
+                    <div class="msg-name">Lexa ❤️</div>
+                    <div class="bubble">That's totally okay — mahirap nga yan sa umpisa! Let's break it down together 😊<br><br><strong>ax² + bx + c = 0</strong><br><br>Think of it as a U-shaped curve. The roots are where it crosses zero. Let's try factoring first — pinakamadali!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="msg user"><div class="bubble">Sige, factoring!</div></div>
+              <div class="msg ai">
+                <div class="msg-row">
+                  <div class="chat-av"><div class="chat-av-h"></div><div class="chat-av-b"></div></div>
+                  <div>
+                    <div class="msg-name">Lexa ❤️</div>
+                    <div class="bubble">Galing! 🎉 Example: x² + 5x + 6 = 0<br><br>Find two numbers: multiply → 6, add → 5. That's <strong>2 and 3</strong>!<br><br>(x+2)(x+3) = 0 → x = -2 or x = -3<br><br>Malinaw ba? No rush, ulit-ulitin natin kung kailangan 💜<br><br><em style="color:rgba(255,255,255,0.3);font-size:8px;">🧬 DNA: Step-by-step mode active</em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" placeholder="Ask in Taglish...">
+              <button class="send-b"><i class="ti ti-send"></i></button>
+            </div>
+          </div>
+
+          <!-- ═══ JOURNEY ═══ -->
+          <div class="pg" id="pg-journey">
+            <div class="pg-content">
+              <div class="card">
+                <div style="font-size:11px;font-weight:500;color:#fff;margin-bottom:6px;">Mathematics</div>
+                <div class="pb" style="margin-bottom:8px;"><div class="pf" style="width:60%;background:#7C3AED;"></div></div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);">60% complete · Week 3 of 8</div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Your path</div>
+                <div class="journey-step">
+                  <div class="j-dot" style="background:rgba(34,197,94,0.15);color:#86EFAC;font-size:11px;">✓</div>
+                  <div class="j-info"><div class="j-title">Algebra Basics</div><div class="j-sub">Quiz score: 92%</div></div>
+                  <div class="j-week">Wk 1</div>
+                </div>
+                <div class="journey-step">
+                  <div class="j-dot" style="background:rgba(34,197,94,0.15);color:#86EFAC;font-size:11px;">✓</div>
+                  <div class="j-info"><div class="j-title">Functions</div><div class="j-sub">Quiz score: 85%</div></div>
+                  <div class="j-week">Wk 2</div>
+                </div>
+                <div class="journey-step">
+                  <div class="j-dot" style="background:#7C3AED;color:#fff;font-size:9px;">→</div>
+                  <div class="j-info"><div class="j-title" style="color:#A78BFA;">Quadratic Equations</div><div class="j-sub">In progress · 48%</div></div>
+                  <div class="j-week" style="color:#A78BFA;">Wk 3</div>
+                </div>
+                <div class="journey-step">
+                  <div class="j-dot" style="background:rgba(255,255,255,0.06);"></div>
+                  <div class="j-info"><div class="j-title" style="color:rgba(255,255,255,0.35);">Trigonometry</div><div class="j-sub">Locked</div></div>
+                  <div class="j-week">Wk 4</div>
+                </div>
+                <div class="journey-step">
+                  <div class="j-dot" style="background:rgba(255,255,255,0.06);"></div>
+                  <div class="j-info"><div class="j-title" style="color:rgba(255,255,255,0.35);">Statistics</div><div class="j-sub">Locked</div></div>
+                  <div class="j-week">Wk 5</div>
+                </div>
+              </div>
+              <div class="card" style="background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.2);">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#5B21B6;border:1.5px solid #A78BFA;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-direction:column;">
+                    <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);margin-bottom:-1px;"></div>
+                    <div style="width:16px;height:9px;border-radius:8px 8px 0 0;background:rgba(255,255,255,0.2);"></div>
+                  </div>
+                  <div>
+                    <div style="font-size:10px;font-weight:500;color:#C4B5FD;">Lexa's tip</div>
+                    <div style="font-size:8px;color:rgba(255,255,255,0.45);margin-top:1px;">Try the factoring method first — it's the easiest entry point for visuals like you 😊</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ SCHEDULE ═══ -->
+          <div class="pg" id="pg-schedule">
+            <div class="pg-content">
+              <div style="display:flex;gap:4px;">
+                <div style="padding:4px 10px;border-radius:20px;font-size:9px;background:#7C3AED;color:#fff;cursor:pointer;">Today</div>
+                <div style="padding:4px 10px;border-radius:20px;font-size:9px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);cursor:pointer;">Week</div>
+                <div style="padding:4px 10px;border-radius:20px;font-size:9px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);cursor:pointer;">Month</div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Thursday, June 26</div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="display:flex;gap:7px;align-items:flex-start;">
+                    <div style="font-size:8px;color:rgba(255,255,255,0.3);min-width:32px;padding-top:3px;">7:00</div>
+                    <div style="flex:1;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);border-radius:9px;padding:7px;">
+                      <div style="font-size:10px;color:#fff;font-weight:500;">Algebra Review</div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.4);">30 min · Pomodoro</div>
+                      <div class="pill pill-p" style="margin-top:4px;">Peak energy</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:7px;align-items:flex-start;">
+                    <div style="font-size:8px;color:rgba(255,255,255,0.3);min-width:32px;padding-top:3px;">8:00</div>
+                    <div style="flex:1;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.18);border-radius:9px;padding:7px;">
+                      <div style="font-size:10px;color:#fff;font-weight:500;">Science: Cell Biology</div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.4);">45 min · Visual</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:7px;align-items:flex-start;">
+                    <div style="font-size:8px;color:rgba(255,255,255,0.3);min-width:32px;padding-top:3px;">9:00</div>
+                    <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:7px;">
+                      <div style="font-size:10px;color:rgba(255,255,255,0.5);">Break</div>
+                      <div style="font-size:8px;color:rgba(255,255,255,0.25);">15 min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="sect-title">DNA Energy forecast</div>
+                <div style="display:flex;align-items:flex-end;gap:2px;height:48px;margin-top:4px;">
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:rgba(255,255,255,0.1);height:35%;"></div>
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:#7C3AED;height:70%;"></div>
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:#7C3AED;height:100%;"></div>
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:#A78BFA;height:80%;"></div>
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:rgba(255,255,255,0.1);height:45%;"></div>
+                  <div style="flex:1;border-radius:2px 2px 0 0;background:rgba(255,255,255,0.07);height:25%;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:3px;">
+                  <span style="font-size:7px;color:rgba(255,255,255,0.25);">6AM</span>
+                  <span style="font-size:7px;color:rgba(255,255,255,0.25);">9AM</span>
+                  <span style="font-size:7px;color:rgba(255,255,255,0.25);">12PM</span>
+                  <span style="font-size:7px;color:rgba(255,255,255,0.25);">7PM</span>
+                </div>
+                <div style="margin-top:6px;padding:6px 8px;background:rgba(124,58,237,0.1);border-radius:7px;font-size:8px;color:rgba(255,255,255,0.5);">🧬 Best time tonight: <span style="color:#A78BFA;font-weight:500;">7–9 PM</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ ANALYTICS ═══ -->
+          <div class="pg" id="pg-analytics">
+            <div class="pg-content">
+              <div class="g2">
+                <div class="card-sm"><div class="stat-label">Total hours</div><div class="stat-val">48.5h</div><div class="stat-sub">This month</div></div>
+                <div class="card-sm"><div class="stat-label">Streak</div><div class="stat-val">🔥 12</div><div class="stat-sub">Days in a row</div></div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Study hours this week</div>
+                <div class="bar-chart">
+                  <div class="bar-col"><div class="bar" style="height:70%;background:#7C3AED;"></div><div class="bar-lbl">M</div></div>
+                  <div class="bar-col"><div class="bar" style="height:55%;background:#7C3AED;"></div><div class="bar-lbl">T</div></div>
+                  <div class="bar-col"><div class="bar" style="height:85%;background:#7C3AED;"></div><div class="bar-lbl">W</div></div>
+                  <div class="bar-col"><div class="bar" style="height:50%;background:#A78BFA;"></div><div class="bar-lbl" style="color:#A78BFA;">T</div></div>
+                  <div class="bar-col"><div class="bar" style="height:8%;background:rgba(255,255,255,0.08);"></div><div class="bar-lbl">F</div></div>
+                  <div class="bar-col"><div class="bar" style="height:5%;background:rgba(255,255,255,0.06);"></div><div class="bar-lbl">S</div></div>
+                  <div class="bar-col"><div class="bar" style="height:5%;background:rgba(255,255,255,0.06);"></div><div class="bar-lbl">S</div></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Badges</div>
+                <div class="badge-g">
+                  <div class="badge-item"><div class="badge-ic" style="background:rgba(124,58,237,0.18);">🧬</div><div class="badge-nm">DNA Pioneer</div></div>
+                  <div class="badge-item"><div class="badge-ic" style="background:rgba(52,211,153,0.12);">🔥</div><div class="badge-nm">7-Day Streak</div></div>
+                  <div class="badge-item"><div class="badge-ic" style="background:rgba(251,191,36,0.12);">⚡</div><div class="badge-nm">Speed Solver</div></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Leaderboard</div>
+                <div class="lb-item"><div style="font-size:10px;min-width:14px;color:#FCD34D;">1</div><div class="lb-av" style="background:#7C3AED;">SY</div><div class="lb-nm">Syril (You)</div><div class="lb-pt">2,350</div></div>
+                <div class="lb-item" style="border-bottom:none;"><div style="font-size:10px;min-width:14px;color:#9CA3AF;">2</div><div class="lb-av" style="background:#34D399;color:#1F2937;">MR</div><div class="lb-nm">Maria R.</div><div class="lb-pt">1,980</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ DNA PROFILE ═══ -->
+          <div class="pg" id="pg-profile">
+            <div class="pg-content">
+              <div class="card" style="text-align:center;padding:14px;">
+                <div class="profile-av-wrap">
+                  <div class="pav-head"></div>
+                  <div class="pav-body"></div>
+                </div>
+                <div style="font-size:13px;font-weight:600;color:#fff;">Syril</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;margin:2px 0 8px;">VISUAL LEARNER · CARING MENTOR</div>
+                <div style="display:flex;justify-content:center;gap:4px;flex-wrap:wrap;">
+                  <div class="pill pill-p">Visual</div>
+                  <div class="pill" style="background:rgba(236,72,153,0.15);color:#F9A8D4;">❤️ Caring</div>
+                  <div class="pill pill-a">Taglish</div>
+                </div>
+                <div style="margin-top:10px;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.06em;">DNA-7C3AED · 87% calibrated</div>
+              </div>
+              <div class="card">
+                <div class="sect-title">DNA Traits</div>
+                <div class="dna-trait"><div class="dna-tn">Learning style</div><div class="dna-tv">Visual</div></div>
+                <div class="dna-trait"><div class="dna-tn">Tutor personality</div><div class="dna-tv">Caring Mentor</div></div>
+                <div class="dna-trait"><div class="dna-tn">Language mode</div><div class="dna-tv">Taglish</div></div>
+                <div class="dna-trait"><div class="dna-tn">Best study time</div><div class="dna-tv">7–9 PM</div></div>
+                <div class="dna-trait"><div class="dna-tn">Grade level</div><div class="dna-tv">High School</div></div>
+              </div>
+              <div class="card">
+                <div class="sect-title">Preferences</div>
+                <div class="dna-trait"><div class="dna-tn">Notifications</div><div style="width:26px;height:14px;border-radius:10px;background:#7C3AED;display:flex;align-items:center;justify-content:flex-end;padding:2px;cursor:pointer;"><div style="width:10px;height:10px;border-radius:50%;background:#fff;"></div></div></div>
+                <div class="dna-trait"><div class="dna-tn">Offline mode</div><div style="width:26px;height:14px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;padding:2px;cursor:pointer;"><div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.5);"></div></div></div>
+              </div>
+              <button style="width:100%;padding:8px;border-radius:8px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.18);color:#F87171;font-size:10px;cursor:pointer;" onclick="if(confirm('Reset your Learning DNA?')){}">Reset Learning DNA</button>
+            </div>
+          </div>
+
+          <!-- ═══ SUBJECTS ═══ -->
+          <div class="pg" id="pg-subjects">
+            <div class="pg-content">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+                <div class="subj-card" style="background:#2D1B6B;" onclick="navigateTo('journey')">
+                  <div style="font-size:16px;margin-bottom:4px;">📐</div>
+                  <h3>Math</h3>
+                  <p>Algebra</p>
+                  <div class="pb" style="margin-top:5px;"><div class="pf" style="width:60%;background:rgba(255,255,255,0.4);"></div></div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:2px;">60% done</div>
+                </div>
+                <div class="subj-card" style="background:#064E3B;">
+                  <div style="font-size:16px;margin-bottom:4px;">🔬</div>
+                  <h3>Science</h3>
+                  <p>Biology</p>
+                  <div class="pb" style="margin-top:5px;"><div class="pf" style="width:72%;background:rgba(255,255,255,0.4);"></div></div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:2px;">72% done</div>
+                </div>
+                <div class="subj-card" style="background:#1E3A5F;">
+                  <div style="font-size:16px;margin-bottom:4px;">📖</div>
+                  <h3>English</h3>
+                  <p>Grammar</p>
+                  <div class="pb" style="margin-top:5px;"><div class="pf" style="width:35%;background:rgba(255,255,255,0.4);"></div></div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:2px;">35% done</div>
+                </div>
+                <div class="subj-card" style="background:#7C2D12;">
+                  <div style="font-size:16px;margin-bottom:4px;">🌍</div>
+                  <h3>History</h3>
+                  <p>PH History</p>
+                  <div class="pb" style="margin-top:5px;"><div class="pf" style="width:22%;background:rgba(255,255,255,0.4);"></div></div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:2px;">22% done</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- NAVBAR -->
+        <div class="navbar">
+          <button class="nav-btn active" id="nb-home" onclick="navigateTo('home')"><i class="ti ti-home"></i><span>Home</span></button>
+          <button class="nav-btn" id="nb-chat" onclick="navigateTo('chat')"><i class="ti ti-message-circle"></i><span>Lexa</span></button>
+          <button class="nav-btn" id="nb-journey" onclick="navigateTo('journey')"><i class="ti ti-map"></i><span>Journey</span></button>
+          <button class="nav-btn" id="nb-schedule" onclick="navigateTo('schedule')"><i class="ti ti-calendar"></i><span>Schedule</span></button>
+          <button class="nav-btn" id="nb-analytics" onclick="navigateTo('analytics')"><i class="ti ti-chart-bar"></i><span>Stats</span></button>
+          <button class="nav-btn" id="nb-profile" onclick="navigateTo('profile')"><i class="ti ti-dna"></i><span>DNA</span></button>
+          <button class="nav-btn" id="nb-subjects" onclick="navigateTo('subjects')"><i class="ti ti-book"></i><span>Books</span></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let p1step = 0;
+const p1steps = [
+  { q: "What's your grade level?", opts: ["High School","College","Grade School","Self-learner"] },
+  { q: "How do you learn best?", opts: ["👁 Visual","🎵 Auditory","✋ Kinesthetic","📝 Reading"] },
+  { q: "Preferred language?", opts: ["English","Filipino","Taglish","Gen Z Slang"] },
+];
+let persSelected = 'caring';
+
+function selOb1(el) {
+  document.querySelectorAll('#p1opts .ob-opt').forEach(e => e.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function ob1Next() {
+  p1step++;
+  [1,2,3,4].forEach(i => {
+    const d = document.getElementById('p1d' + i);
+    if (d) { d.className = 'ob-d' + (i <= p1step ? ' on' : ''); }
+  });
+  if (p1step >= p1steps.length) {
+    document.getElementById('ph1-ob').classList.add('hide');
+    document.getElementById('ph1-pers').classList.remove('hide');
+    return;
+  }
+  const s = p1steps[p1step];
+  document.getElementById('p1-question').textContent = s.q;
+  document.getElementById('p1opts').innerHTML = s.opts.map((o, i) =>
+    `<div class="ob-opt${i===0?' sel':''}" onclick="selOb1(this)">${o}</div>`
+  ).join('');
+}
+
+function selPers(el, id) {
+  document.querySelectorAll('.pers-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  persSelected = id;
+}
+
+function finishOnboarding() {
+  document.getElementById('ph1-pers').classList.add('hide');
+}
+
+function navigateTo(page) {
+  document.querySelectorAll('#phone-pages .pg').forEach(p => p.classList.remove('active'));
+  const t = document.getElementById('pg-' + page);
+  if (t) t.classList.add('active');
+  document.querySelectorAll('.navbar .nav-btn').forEach(b => b.classList.remove('active'));
+  const nb = document.getElementById('nb-' + page);
+  if (nb) nb.classList.add('active');
+}
+</script>
+</body>
+</html>
